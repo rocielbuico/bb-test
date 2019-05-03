@@ -1,0 +1,58 @@
+.rb-sidebar {
+  background-color: color("actions", "primary", "darkest");
+
+  .nav {
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        height: $navigation-item-height;
+        padding-left: $small-padding-height;
+      }
+
+      a:focus {
+        background-color:$primary-bright;
+      }
+
+      &.active {
+        background-color: $primary-bright;
+        border-left: 3px solid $cyan;
+      }
+
+      &.active a {
+        color: $navigation-link-active-color;
+      }
+    }
+    li.bb-universal-nav-header,
+    span.bb-universal-nav-item-title {
+      @include animation(opacity, $animation-sidebar-duration);
+      opacity: 0;
+    }
+    li.bb-universal-nav-divider {
+      height: 1px;
+      margin-top: $large-margin-height;
+      background-color: color("info");
+    }
+  }
+
+  .bb-universal-nav {
+    margin-top: 1.5rem;
+    &-item {
+      &-menu-icon {
+        @extend .d-inline-block;
+
+        font-size: $sidebar-icon-size;
+        margin-right: 18px;
+        max-width: 20px;
+      }
+      &-title {
+        line-height: 20px;
+      }
+    }
+
+    &-divider,
+    &-header {
+      border: none;
+    }
+  }
+}

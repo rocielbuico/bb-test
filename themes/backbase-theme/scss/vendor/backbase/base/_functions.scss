@@ -1,0 +1,61 @@
+//// Your backbase sass functions belong here -- which return some sass/css/data values
+//// This is where the backbase theme overrides or extends upon existing Bootstrap 4 functions
+
+/// Nested Map Accessor Utility
+/// Iterates over a nested map, based on a linear drilldown to the property value that's nested
+/// @access public
+/// @group general-helpers
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Returns the level at which the properties are successively provided 
+/// @example 
+///   map-deep-get($map, "parent-prop", "child-prop")
+@function map-deep-get($map, $keys...) {
+  $counter: 1;
+  @each $key in $keys {
+    $map: map-get($map, $key);
+    @if $map == null {
+      @return nth($map, $counter);
+    }
+    $counter: $counter + 1;
+  }
+  @return $map;
+}
+
+/// [BS4] Color function override
+/// @access public
+/// @group color-helpers
+/// @param {Arglist} $colorProps - Key chain
+/// @return {*} - Color or Map (if incomplete)
+/// @example 
+///   color("Actions[i]", "Supports[i], Extends[i]") 
+///   color("primary")
+/// @example 
+///   color("actions" "primary", "darker")
+@function color($colorProps...) {
+  $supportList: map-keys(map-get($color-palette, "support"));
+  $actionList: map-keys(map-get($color-palette, "actions"));
+  $colorsList: map-keys($colors);
+  $joinedColors: join(join( $supportList, $actionList), $colorsList);
+
+  //if single color specifier, assume to return a default
+  @if length($colorProps) == 1 { 
+    $shortcut: nth($colorProps, 1);
+    
+    //if shortcut is contained in support, action, colors
+    @if index($supportList, $shortcut) {
+      @return map-deep-get($color-palette, 'support', $shortcut, "default");
+    }
+    @else if index($actionList, $shortcut) {
+      @return map-deep-get($color-palette, 'actions', $shortcut, "default");
+    }
+    @else if index($colorsList, $shortcut) {
+      @return map-get($colors, $shortcut);
+    }
+    @else {
+      @error "Please check the $color-palette to retrieve the correct color ref. (provided args:: #{$colorProps}";
+    }
+  }
+  //If no shortcut...treat the color argsList as the full successive reference to the color
+  @return map-deep-get($color-palette, $colorProps...);
+}

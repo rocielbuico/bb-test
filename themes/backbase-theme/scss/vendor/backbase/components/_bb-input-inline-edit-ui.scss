@@ -1,0 +1,24 @@
+bb-input-inline-edit-ui {
+
+  .bb-input-inline-container {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .bb-input-inline-text {
+    margin-right: 2em;
+  }
+
+  .bb-input-inline-buttons {
+    margin-top: 1em;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .bb-input-inline-round-button {
+    width: 2.1em;
+    height: 2.1em;
+    margin-left: .8em;
+  }
+
+}

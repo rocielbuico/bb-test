@@ -1,0 +1,34 @@
+.bb-stepper {
+  .bb-stepper-separator {
+    background-color: color('neutrals', 'greyer');
+    height: 1px;
+  }
+
+  .bb-stepper-step {
+    &.active {
+      .bb-step-icon {
+        background-color: color('actions', 'selected', 'default');
+      }
+    }
+
+    .bb-step-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: color('neutrals', 'white');
+      line-height: 1;
+      background-color: color('neutrals', 'dark');
+      flex: 0 0 auto;
+    }
+
+    .bb-step-label {
+      @include media-breakpoint-down(xs) {
+        @include text-truncate();
+
+        position: absolute;
+        top: -100%;
+        left: 0;
+      }
+    }
+  }
+}
+

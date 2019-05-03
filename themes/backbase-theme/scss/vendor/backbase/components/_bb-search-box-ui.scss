@@ -1,0 +1,43 @@
+.bb-search-box-visible {
+  border-radius: $search-box-border-radius;
+  border: $input-border-width solid $input-border-color;
+  background-color: $white;
+  &.bb-focus {
+    box-shadow: $input-btn-focus-box-shadow;
+  }
+  &.bb-search-box-search input {
+    padding-left: $search-box-input-padding;
+  }
+  &.bb-search-box-clear input {
+    padding-right: $search-box-input-padding;
+  }
+  input {
+    border: none;
+    background: none;
+    order: 1;
+    &:focus {
+      background: none;
+      box-shadow: none;
+    }
+  }
+  .input-group-prepend {
+    order: 0;
+  }
+  .input-group-append {
+    order: 2;
+  }
+  .input-group-prepend button,
+  .input-group-append button {
+    border: none;
+    background: none;
+    border-radius: $search-box-border-radius;
+    height: 100%;
+    &:focus {
+      background: none;
+      box-shadow: $input-btn-focus-box-shadow;
+    }
+    &.btn-link:focus {
+      text-decoration: none;
+    }
+  }
+}

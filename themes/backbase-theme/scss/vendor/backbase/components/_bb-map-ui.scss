@@ -1,0 +1,8 @@
+.places-map {
+  min-height: $map-container-height;
+}
+
+.places-list {
+  max-height: $map-container-height;
+  overflow: scroll;
+}

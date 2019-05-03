@@ -1,0 +1,86 @@
+bb-icon-ui {
+  display: inline-flex;
+}
+
+.bicon {
+  @extend .material-icons;
+  text-align: center;
+
+  &.animate {
+    @extend .bb-loading-indicator-circle;
+  }
+
+  // Add icon-circle sizing for general icon circles
+  @each $size-abbr, $size in $icon-size-map {
+    &.bicon-#{$size-abbr} {
+      font-size: #{$size};
+    }
+  }
+  // Add icon-circle sizing for general icon circles
+  @each $size-abbr, $size in $icon-circle-size-map {
+    &.icon-circle-#{$size-abbr} {
+      width: $size;
+      height: $size;
+      line-height: $size;
+      color: color("neutrals", "white");
+      border-radius: 50%;
+    }
+    // Default icon-circle size
+    @if $size-abbr == 'md' {
+      &.icon-circle {
+        width: $size;
+        height: $size;
+        line-height: $size;
+        color: color("neutrals", "white");
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+@each $bb-icon-name, $icon-data in $icon-map {
+  @if (type-of($icon-data) == 'string') {
+    .bicon-#{$bb-icon-name}:before {
+      content: $icon-data;
+    }
+  }
+
+  // Example class output: .bicon-category-shopping:before
+  @if (str-index('#{$bb-icon-name}', 'category') ) {
+    .bicon-#{$bb-icon-name} {
+      //by default, category icons should have a color
+      color: map-get($icon-data, 'color');
+
+      &:before {
+        content: map-get($icon-data, 'icon');
+      }
+
+      // Add sizing to only category icons, and icon-circle colors
+      @each $size-abbr, $size in $icon-size-map {
+        &.bicon-#{$size-abbr} {
+          font-size: #{$size};
+        }
+        //to make btn /w category colored, sized circles
+        // !important needed to override use of bg-{color}, bootstrap utility class
+        &.icon-circle-#{$size-abbr}, &.icon-circle {
+          background-color: map-get($icon-data, 'color') !important;
+          color: color('neutrals', 'white');
+        }
+      }
+    }
+  }
+}
+
+
+//TODO: Add feature @Input for bb-icon-ui
+.bicon-arrow-in:before {
+  content: 'reply';
+  display: inline-block;
+  transform: rotateX(180deg);
+}
+
+.bicon-arrow-out:before {
+  content: 'reply';
+  display: inline-block;
+  transform: rotateY(180deg);
+}

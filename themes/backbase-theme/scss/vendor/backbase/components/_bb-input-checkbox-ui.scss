@@ -1,0 +1,72 @@
+.bb-input-checkbox-label {
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.bb-input-checkbox {
+  position: absolute;
+  opacity: 0;
+  &:checked + .bb-input-checkbox-content,
+  &:indeterminate + .bb-input-checkbox-content {
+    &::before {
+      border-color: color('selected');
+    }
+    &::after {
+      @extend .material-icons;
+      font-weight: bold;
+      background-color: color('selected');
+      color: color('neutrals', 'white');
+      font-size: 1em !important;
+      line-height: 1em !important;
+    }
+  }
+  &:checked + .bb-input-checkbox-content::after {
+    content: 'check';
+  }
+  &:indeterminate + .bb-input-checkbox-content::after {
+    content: 'remove';
+  }
+  &:disabled + .bb-input-checkbox-content {
+    cursor: not-allowed;
+    &::before {
+      border: none;
+      background-color: color('neutrals', 'lighter');
+      cursor: not-allowed;
+    }
+    &::after {
+      cursor: not-allowed;
+      background-color: color('neutrals', 'lighter');
+      color: color('secondary');
+    }
+  }
+  &:focus + .bb-input-checkbox-content::before {
+    outline: color('primary') auto $checkbox-outline;
+  }
+  &:hover + .bb-input-checkbox-content::before {
+    background-color: color('neutrals', 'lighter');
+  }
+  + .bb-input-checkbox-content {
+    padding-left: calc(1em + 8px);
+    &::before {
+      border: 1px solid color('neutrals', 'darker');
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    &::before,
+    &::after {
+      position: absolute;
+      content: "";
+      top: calc(50% - 0.5em);
+      left: 0;
+      height: 1em;
+      width: 1em;
+      border-radius: 2px;
+    }
+  }
+}
+
+.bb-input-checkbox-content {
+  position: relative;
+  display: inline-flex;
+}

@@ -1,0 +1,28 @@
+.product-item-group {
+  box-shadow: $box-shadow-sm; //@TODO: Deprecate in BDS3.3.0
+}
+
+.product-item-group {
+  > *:not(:last-of-type) > .product-item {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  > *:not(:first-of-type) > .product-item {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-top: 1px solid color('neutrals', 'light');
+  }
+}
+
+div[class^="bb-product-item-"] {
+  &.product-item {
+    &.active {
+      box-shadow: inset 4px 0 0 color('selected');
+    }
+    overflow: hidden;
+
+    .product-item-content {
+      background-color: color('neutrals', 'white');
+    }
+  }
+}

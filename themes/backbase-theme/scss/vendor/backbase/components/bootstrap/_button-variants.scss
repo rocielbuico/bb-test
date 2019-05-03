@@ -1,0 +1,239 @@
+.btn {
+  @extend .font-weight-medium;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  i + span,
+  span + i {
+    margin-left: $btn-padding-x;
+  }
+
+  &.btn-sm {
+    i {
+      font-size: $font-icon-size-sm;
+    }
+  }
+
+  &.btn-lg {
+    i {
+      font-size: $font-icon-size-lg;
+    }
+
+  }
+  &.btn-circle {
+    padding: $font-icon-btn-padding;
+  }
+  &:focus {
+    box-shadow: $btn-focus-box-shadow;
+  }
+
+}
+
+// For each of Bootstrap's buttons, define text, background, and border color.
+@each $color, $value in $button-palette {
+  .btn-#{$color} {
+    @include button-variant(
+      map-deep-get($button-palette, $color, "default"), //default-background
+      map-deep-get($button-palette, $color, "default"), //default-border
+      map-deep-get($button-palette, $color, "dark"),    //hover-background
+      map-deep-get($button-palette, $color, "dark"),    //hover-border
+      map-deep-get($button-palette, $color, "darker"),  //active-background
+      map-deep-get($button-palette, $color, "darker")  //active-border
+    );
+
+    &:disabled,
+    &.disabled {
+      background-color: color('neutrals', 'lighter');
+      color: $text-muted;
+    }
+
+    //For loading indicators inside 'support' status buttons
+    &:not(.btn-link) .bb-loading-indicator-path {
+      stroke: color-yiq(
+        map-deep-get($button-palette, $color, "default")
+      );
+    }
+  }
+}
+
+// Add border width to outline buttons, different from solid buttons
+@each $color, $value in $button-outline-palette {
+  $hover-color: map-get($theme-outline-hover-colors, $color);
+  .btn-outline-#{$color} {
+
+    //Override BS4 Mixin
+    $outline-color: map-deep-get($button-outline-palette, $color, "default");
+    @include button-outline-variant($outline-color);
+
+    border-width: $btn-outline-border-width;
+
+    &:not(:disabled):not(.disabled) {
+      @include hover-focus {
+        color: color-yiq($hover-color);
+        background-color: $hover-color;
+      }
+
+      &:active,
+      &.active {
+        color: color-yiq(darken($hover-color, 10%));
+        background-color: darken($hover-color, 10%);
+      }
+    }
+  }
+}
+
+.btn-icon {
+  @include gradient-bg(transparent);
+
+  height: $btn-icon-height;
+  width: $btn-icon-width;
+  line-height: $btn-icon-height;
+  padding: $btn-icon-padding-y $btn-icon-padding-x;
+  border: none;
+  border-color: transparent;
+  color: transparent;
+  position: relative;
+
+  @include hover {
+    @include gradient-bg(transparent);
+
+    color: transparent;
+    border-color: transparent;
+  }
+
+  > i {
+    font-size: $btn-icon-font-size;
+    color: $btn-icon-color;
+  }
+
+  &.btn-sm {
+    height: $btn-icon-height-sm;
+    width: $btn-icon-width-sm;
+    line-height: $btn-icon-height-sm;
+    padding: $btn-icon-padding-y-sm $btn-icon-padding-x-sm;
+    & > i {
+      font-size: $btn-icon-font-size-sm;
+    }
+  }
+
+  &-glow {
+    z-index: 2;
+
+    &:not(:disabled):not(.disabled) {
+      &:after {
+        @include animation(transform);
+        @include size(100%, 100%);
+
+        content: "";
+        z-index: -1;
+        position: absolute;
+        background-color: $btn-icon-bg-color;
+        display: inline-block;
+        border-radius: $btn-border-radius;
+        margin: 0;
+        top: 0;
+        left: 0;
+        transform: scale(0);
+        transform-origin: 50% 50%;
+      }
+
+      &:hover:after {
+        @include animation(transform);
+
+        transform-origin: 50% 50%;
+        background-color: $btn-icon-hover-color;
+        transform: scale(1);
+      }
+
+      &:active:after {
+        @include animation(background-color);
+        background-color: $btn-icon-active-color;
+      }
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    $hover-color: map-get($theme-outline-hover-colors, $color);
+    &.btn-icon-#{$color} {
+      &, &:not(:disabled):not(.disabled) > i {
+        color: $value;
+      }
+      &.btn-icon-glow:not(:disabled):not(.disabled) {
+        &:hover:after {
+          @include animation(background-color);
+          background-color: $hover-color;
+        }
+        &:active:after {
+          @include animation(background-color);
+          background-color: darken($hover-color, 10%);
+        }
+      }
+
+      &.btn-icon-solid {
+        @include animation(background-color);
+        background-color: $value;
+        border-color: transparent;
+
+        &, &:not(:disabled):not(.disabled) > i {
+          color:color("neutrals", "white");
+        }
+
+        &.btn-icon-glow:not(:disabled):not(.disabled) {
+          &:hover:after {
+            @include animation(background-color);
+            background-color: darken($value, 10%);
+          }
+          &:active:after {
+            @include animation(background-color);
+            background-color: darken($value, 15%);
+          }
+        }
+      }
+    }
+
+    // Fix active and disabled state from regular buttons
+    &.btn-#{$color} {
+      &:not(:disabled):not(.disabled):active,
+      &.disabled,
+      &:disabled {
+        background-color: transparent;
+        color: transparent;
+        border-color: transparent;
+      }
+    }
+  }
+
+  &-shade {
+    @include animation(background-color);
+    background-color: color("neutrals", "light");
+    transform: scale(1);
+  }
+}
+
+.btn-link {
+  color: $btn-link-color;
+
+  &:not(:disabled):not(.disabled) {
+    @include hover {
+      color: $btn-link-color;
+      background-color: color("neutrals", "lighter");
+    }
+
+    &.active, &:active {
+      color: darken($btn-link-color, 10%);
+      background-color: color("neutrals", "light");
+    }
+
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+button,
+[type="submit"],
+[type="button"],
+[type="reset"] {
+  @include appearance-toggle();
+}

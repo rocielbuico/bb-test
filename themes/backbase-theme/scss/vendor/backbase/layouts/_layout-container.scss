@@ -1,0 +1,97 @@
+/**
+ ** Styles for WA3 Layout Container
+ **/
+.top-side-navigation-layout {
+  &.fixed {
+    .rb-content {
+      padding-left: $sidebar-width;
+      max-width: $page-layout-fixed-content-max-width + $sidebar-width + $navigation-main-content-padding-left;
+    }
+    &.hideSidebar {
+      .rb-sidebar {
+        width: 0;
+      }
+      .rb-content {
+        padding-left: 0;
+        max-width: $page-layout-fixed-content-max-width + $navigation-main-content-padding-left;
+      }
+    }
+  }
+  &.hideSidebar {
+    .rb-sidebar {
+      width: 0;
+    }
+    .rb-content {
+      padding-left: $navigation-main-content-padding-left;
+    }
+  }
+  .rb-content {
+    padding-left: $sidebar-width + $navigation-main-content-padding-left;
+  }
+}
+
+// Large
+// Large -- show full sidebar /w full labels
+@include media-breakpoint-up(lg) {
+  .rb-sidebar {
+    @include toggle-sidebar-labels(true);
+  }
+  .main {
+    padding-left: $sidebar-width + $gutter;
+  }
+
+  // this class is only applicable for large screens
+  .small-sidebar {
+    @include small-sidebar();
+  }
+}
+
+@include media-breakpoint-down(md) {
+  @include small-sidebar();
+  .top-side-navigation-layout {
+    &.fixed {
+      .rb-content {
+        max-width: $page-layout-fixed-content-max-width + $sidebar-collapsed-width + $navigation-main-content-padding-left;
+        padding-left: $sidebar-collapsed-width + $navigation-main-content-padding-left;
+      }
+      &.hideSidebar {
+        .rb-content {
+          padding-left: $navigation-main-content-padding-left;
+        }
+      }
+    }
+    .rb-content {
+      padding-left: $sidebar-collapsed-width + $navigation-main-content-padding-left;
+    }
+  }
+}
+
+// Small -- hides the sidebar completely on 'sm' (and below)
+@include media-breakpoint-down(sm) {
+  .rb-sidebar {
+    transform: translateX(-$sidebar-collapsed-width);
+  }
+  .main {
+    &,
+    &:not(.soy-template) {
+      padding-left: $gutter;
+    }
+  }
+  .top-side-navigation-layout {
+    &.fixed {
+      .rb-content {
+        padding-left: $navigation-main-content-padding-left;
+        max-width: $page-layout-fixed-content-max-width + $navigation-main-content-padding-left;
+      }
+      &.hideSidebar {
+        .rb-content {
+          padding-left: $navigation-main-content-padding-left;
+        }
+      }
+    }
+
+    .rb-content {
+      padding-left: $navigation-main-content-padding-left;
+    }
+  }
+}

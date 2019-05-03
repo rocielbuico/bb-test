@@ -1,0 +1,21 @@
+bb-navigation-horizontal-widget {
+  .horizontal-navbar {
+    background: color('actions', 'primary', 'darkest');
+  }
+
+  .nav-item {
+    padding: 1em 1.5em;
+  }
+
+  .nav-item.active {
+    background: color('actions', 'primary', 'dark');
+  }
+
+  .dropdown-menu {
+    margin-top: 1em;
+  }
+
+  a.nav-link {
+    color: color('neutrals', 'white');
+  }
+}

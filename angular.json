@@ -1,0 +1,308 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "banking-app": {
+      "root": "apps/banking-app/",
+      "sourceRoot": "apps/banking-app/src",
+      "projectType": "application",
+      "prefix": "pt",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true,
+          "spec": false
+        },
+        "@schematics/angular:class": {
+          "spec": false
+        },
+        "@schematics/angular:directive": {
+          "spec": false
+        },
+        "@schematics/angular:guard": {
+          "spec": false
+        },
+        "@schematics/angular:module": {
+          "spec": false
+        },
+        "@schematics/angular:pipe": {
+          "spec": false
+        },
+        "@schematics/angular:service": {
+          "spec": false
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/banking-app",
+            "index": "apps/banking-app/src/index.html",
+            "main": "apps/banking-app/src/main.ts",
+            "polyfills": "apps/banking-app/src/polyfills.ts",
+            "tsConfig": "apps/banking-app/src/tsconfig.app.json",
+            "assets": [
+              {
+                "input": "dist/custom-project-assets",
+                "glob": "**/*",
+                "output": "assets"
+              },
+              "apps/banking-app/src/favicon.ico",
+              "apps/banking-app/src/assets"
+            ],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/banking-app/src/environments/environment.ts",
+                  "with": "apps/banking-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "banking-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "banking-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "banking-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/banking-app/src/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/banking-app/src/polyfills.ts",
+            "tsConfig": "apps/banking-app/src/../../../tsconfig.spec.json",
+            "environment": "dev",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/banking-app/src/tsconfig.app.json",
+              "apps/banking-app/src/../../../tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "banking-app-e2e": {
+      "root": "apps/banking-app-e2e",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/banking-app-e2e/protractor.conf.js",
+            "devServerTarget": "banking-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "banking-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/banking-app-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "customized-product-summary-list-widget": {
+      "root": "libs/customized-product-summary-list-widget",
+      "sourceRoot": "libs/customized-product-summary-list-widget/src",
+      "projectType": "library",
+      "prefix": "pt",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/customized-product-summary-list-widget/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/banking-app/src/polyfills.ts",
+            "tsConfig": "./tsconfig.spec.json",
+            "environment": "dev",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "files": [
+              "libs/customized-product-summary-list-widget/**/*.ts"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "customized-user-details": {
+      "root": "libs/customized-user-details",
+      "sourceRoot": "libs/customized-user-details/src",
+      "projectType": "library",
+      "prefix": "pt",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/customized-user-details/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/banking-app/src/polyfills.ts",
+            "tsConfig": "./tsconfig.spec.json",
+            "environment": "dev",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "files": [
+              "libs/customized-user-details/**/*.ts"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "customized-user-contact-number": {
+      "root": "libs/customized-user-contact-number",
+      "sourceRoot": "libs/customized-user-contact-number/src",
+      "projectType": "library",
+      "prefix": "pt",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/customized-user-contact-number/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/banking-app/src/polyfills.ts",
+            "tsConfig": "./tsconfig.spec.json",
+            "environment": "dev",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "files": [
+              "libs/customized-user-contact-number/**/*.ts"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "customized-user-address": {
+      "root": "libs/customized-user-address",
+      "sourceRoot": "libs/customized-user-address/src",
+      "projectType": "library",
+      "prefix": "pt",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/customized-user-address/test.ts",
+            "karmaConfig": "./karma.conf.js",
+            "polyfills": "apps/banking-app/src/polyfills.ts",
+            "tsConfig": "./tsconfig.spec.json",
+            "environment": "dev",
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "test.ts",
+              "**/polyfills.ts"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "files": [
+              "libs/customized-user-address/**/*.ts"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@bb-cli/schematics"
+  },
+  "schematics": {
+    "@bb-cli/schematics:widget": {
+      "npmScope": "peachtree"
+    },
+    "@bb-cli/schematics:library": {
+      "npmScope": "peachtree"
+    },
+    "@bb-cli/schematics:data-module": {
+      "npmScope": "peachtree"
+    }
+  },
+  "defaultProject": "banking-app"
+}

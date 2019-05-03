@@ -1,0 +1,88 @@
+////
+/// Theme Variables
+/// @group helpers
+////
+
+/// Your new custom sass variables belong here -- which contain common data structure support for css values
+/// This is where the custom theme overrides or extends existing Backbase variables
+/// Use the base.scss for overriding or setting global sass variables
+
+/* 
+  PROJECT QUICKSTART SCENARIOS: 
+
+  === Change colors: Buttons ===
+
+    New File: [ helpers/variables/_buttons.scss ]
+
+    $primaryMap: map-merge($primaryMap, (
+      lighter: $new-color-lighter,
+      light: $new-color-light,
+      default: $new-color,
+      dark: $new-color-dark,
+      darker: $new-color-darker,
+      darkest: $new-color-darkest
+    )); 
+    $button-palette: map-merge($button-palette, (primary: $primaryMap));
+  
+  NOTE: btn-outline has its own map, called $button-outline-palette
+
+  === Change colors: Alert ===
+
+    New File: [ helpers/variables/_alerts.scss ]
+
+    $primaryMap: map-merge($primaryMap, (
+      lighter: $new-color-lighter,
+      light: $new-color-light,
+      default: $new-color,
+      dark: $new-color-dark,
+      darker: $new-color-darker,
+      darkest: $new-color-darkest
+    )); 
+    $alert-palette: map-merge($alert-palette, (primary: $primaryMap));
+
+  === Change typography: Base & Headings ===
+
+    New File: [ helpers/variables/_typography.scss ]
+
+    $font-size-base: 16px;
+    $h1-font-size:           $font-size-base * 3; // 48px
+    $h2-font-size:           $font-size-base * 2.5; //40px
+    $h3-font-size:           $font-size-base * 2; //32px
+    $h4-font-size:           $font-size-base * 1.75; //28px
+    $h5-font-size:           $font-size-base * 1.5; //24px
+    $h6-font-size:           $font-size-base * 1.375; //22px
+    $font-weight-light:           300;
+    $font-weight-regular:         normal; //400
+    $font-weight-medium:          500;
+    $font-weight-bold:            500;
+    $headings-color:              color("neutrals", "darkest");
+
+    *** For more font-related helper signatures, see `scss/vendor/backbase/base/_typography.scss` ***
+
+    /// For CSS-Compilation Output Overrides
+
+    New File: [ templates/_typography.scss ]
+
+    h1, .h1 { font-weight: $font-weight-light; }
+    h2, .h2 { font-weight: $font-weight-regular; }
+    h3, .h3 { font-weight: $font-weight-medium; }
+    h4, .h4 { font-weight: $font-weight-medium; }
+    h5, .h5 { font-weight: $font-weight-medium; }
+    h6, .h6 { font-weight: $font-weight-medium; }
+
+  === Change typography: Font-family ===
+
+    New Directory: [ THEME_ROOT/assets/fonts/New_Font_Name/.. ]
+    1. Add font files inside its own font folder
+    2. Define the font-face for added fonts inside scss/fonts/_newFontName.scss
+    3. Import file inside scss/fonts/fonts.scss
+
+    New File: [ helpers/variables/_typography.scss ]
+
+    /// Body Font Families
+    $font-family-sans-serif: "New Font Name";
+
+    /// Header Font Families
+    $headings-font-family:   "New Font Name";
+
+*/

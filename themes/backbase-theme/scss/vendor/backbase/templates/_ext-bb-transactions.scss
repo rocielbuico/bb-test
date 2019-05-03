@@ -1,0 +1,72 @@
+.bb-transaction-category {
+  @extend .bicon;
+  line-height: inherit;
+  
+  &-list-item {
+    & {
+      vertical-align: top;
+      line-height: 60px;
+    }
+  
+    &-name {
+      line-height: 60px;
+    }
+  }
+  
+  &-parent-label {
+    background-color: color("white");
+  }
+  
+  &-name {
+    line-height: $line-height-base * 1.5;
+  }
+  
+  &-icon {
+    width: 1.4rem;
+    text-align: center;
+    background-color: inherit;
+  }
+  
+  // Escape for WC2 support
+  @at-root { 
+    @each $category, $icon, $color in $category-list {
+      &-bg-#{$category} {
+        background-color: $color;
+      }
+    
+      &-#{$category} {
+        @if $icon {
+          @extend .#{$icon};
+        }
+        background-color: $color;
+      }
+    
+      &-#{$category},
+      &-label-#{$category} {
+        color: $color;
+      }
+    }
+    
+    &-large {
+      font-size: 1.4rem;
+      line-height: $line-height-base * 1.5;
+    }
+
+    &-icon-circle {
+      width: 3rem;
+      height: 3rem;
+      color:color("neutrals", "white");
+      line-height: 3rem !important;
+      border-radius: 50%;
+      text-align: center;
+    }
+    
+    @include media-breakpoint-up(sm) {
+      &-list-limited {
+        max-height: 335px;
+        overflow-y: scroll;
+      }
+    }
+  }
+}
+

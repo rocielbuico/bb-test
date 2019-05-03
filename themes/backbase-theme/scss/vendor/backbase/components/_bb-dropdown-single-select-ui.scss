@@ -1,0 +1,18 @@
+.bb-dropdown-single-select {
+  @include appearance-toggle();
+  cursor: pointer;
+  &::-ms-expand {
+    display: none;
+  }
+  &:disabled {
+    box-shadow: none;
+    border: none;
+    cursor: not-allowed;
+  }
+}
+
+.bb-dropdown-single-select-icon {
+  float: right;
+  margin-top: -2.25em; //to center align inside dropdown
+  pointer-events: none;
+}
